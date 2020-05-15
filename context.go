@@ -5,7 +5,11 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/go-msvc/log"
+	logger "github.com/go-msvc/log"
+)
+
+var (
+	log = logger.ForThisPackage()
 )
 
 var (
@@ -32,7 +36,7 @@ func Context(c ICaller) IContext {
 //IContext ...
 type IContext interface {
 	context.Context
-	log.ILogger
+	logger.ILogger
 	ID() string
 	Call(name string, req interface{}) (IResponse, error)
 }
@@ -40,7 +44,7 @@ type IContext interface {
 //msContext implements IContext
 type msContext struct {
 	context.Context
-	log.ILogger
+	logger.ILogger
 	caller ICaller
 	id     string
 }
